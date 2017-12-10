@@ -6,11 +6,14 @@ import { BioVitual, Allergies, Conditions, Labs, Meds, Encounters } from './BioV
 import { Row, Col, Grid } from 'react-bootstrap'
 import { Navbar, Nav, NavItem, MenuItem, NavDropdown } from 'react-bootstrap'
 import Sidebar from 'react-sidebar'
+import QRModal from './QRModal.js'
+import QRCode from 'qrcode.react'
+
 import './css/oswald.css'
 import './css/open-sans.css'
 import './css/pure-min.css'
 import './App.css'
-
+import './css/sidebar.css'
 class MySidebar extends Component {
   constructor(props) {
     super(props);
@@ -49,7 +52,8 @@ class App extends Component {
       error: null,
       isLoading: true,
       storageValue: 0,
-      web3: null
+      web3: null,
+      isModalClosed: false
     }
   }
 
@@ -203,14 +207,13 @@ class App extends Component {
 
   }
 
-  renderMedRec(med) {
-
+  renderMedRec(med, sidebar) {
     console.log(this.state.patient)
     const {patient} = this.state
     return (
         <Grid>
           <Row className="show-grid">
-            <Col xs={2} md={2}></Col>
+            <Col xs={2} md={2}>{sidebar}</Col>
             <Col xs={10} md={10}>
               <BioVitual value={patient.bio} />
               <Allergies value={med.allergies}/>
@@ -247,7 +250,7 @@ class App extends Component {
     }
     const allergy2 = {
       type: "",
-      name: "Ketoconazole", 
+      name: "Ketoconazole",
       description: "dermatitis"
     }
 
@@ -380,20 +383,58 @@ class App extends Component {
       </Navbar>
     );
 
+    const sidebar = (
+      <div id="sidebar-wrapper">
+        <ul className="sidebar-nav">
+            <li className="sidebar-brand">
+                <a href="#">
+                    Start Bootstrap
+                </a>
+            </li>
+            <li>
+                <a href="#">Dashboard</a>
+            </li>
+            <li>
+                <a href="#">Shortcuts</a>
+            </li>
+            <li>
+                <a href="#">Overview</a>
+            </li>
+            <li>
+                <a href="#">Events</a>
+            </li>
+            <li>
+                <a href="#">About</a>
+            </li>
+            <li>
+                <a href="#">Services</a>
+            </li>
+            <li>
+                <a href="#">Contact</a>
+            </li>
+        </ul>
+    </div>
+  );
+
     const { isLoading, error } = this.state;
-    if (isLoading) {
-      return (<p> Loading ... </p>)
-    } else if (error) {
+    if (!this.state.isModalClosed) {
+      return (
+        <QRModal onClick={()=> this.setState({isModalClosed: true})}>
+          <QRCode size={256} value="http://facebook.github.io/react/" />
+        </QRModal>
+      )
+    } else if (isLoading) {
+      return <p> Downloading ... </p>
+    }
+    else if (error) {
       return (<p> Error while loading {this.state.error} </p> )
     } else {
-      const GridSample = this.renderMedRec(medrec);
+      const GridSample = this.renderMedRec(medrec, sidebar);
       return (
-
         <div className="App">
           <div>
             {navbarInstance}
           </div>
-
           <main className="container">
               {GridSample}
           </main>

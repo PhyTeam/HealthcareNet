@@ -46,7 +46,7 @@ body {
 	background: $grey95;
 	font-family: 'SourceSansPro', Helvetica, Arial, Tahoma, sans-serif;
 	font-weight: 400;
-	color: $grey60; 
+	color: $grey60;
 }
 
 /****************************************************************
@@ -156,7 +156,7 @@ address {
 		li {
 			float: left;
 			&:hover {
-				background: $blueBright; 
+				background: $blueBright;
 			}
 			&.active {
 				background: $blueSubdued;
@@ -202,11 +202,8 @@ address {
 
 section {
 
-	margin-top: 30px;
-
 	/* 01 NAME */
 	&.name {
-		margin-top: 60px;
 		h1 {
     		font-family: 'SourceSansPro', Helvetica, Arial, Tahoma, Verdana, sans-serif;
 			font-weight: 100;
@@ -354,11 +351,11 @@ section {
 						color: $white;
 						line-height: 1.35em;
 						clear: both;
-						.day { 
-							text-transform: uppercase; 
+						.day {
+							text-transform: uppercase;
 							float: left;
 							width: 28px;
-						} 
+						}
 						.illus {
 							float: left;
 							padding-left: 6px;
@@ -592,7 +589,7 @@ section {
 			cursor: pointer;
 		}
 
-					
+
 
 	}
 
@@ -600,7 +597,7 @@ section {
 		background: $grey80;
 		margin-top: 0;
 	}
-	
+
 }
 
 .disclaimer {
@@ -795,7 +792,7 @@ section {
 			&.closed {
 				.detail {
 					display: none;
-				}	
+				}
 			}
 			a.line-item {
 				color: inherit;

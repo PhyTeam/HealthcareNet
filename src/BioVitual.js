@@ -103,8 +103,8 @@ class Conditions extends Component {
 	                    </a>
 	                    <div className="detail iconed">
 	                        <p>{event.detail.description}</p>
-	                        <p><strong>Associated Encounters: </strong> <a href="#encounters">{event.detail.encounters}</a></p>
-	                        <p><strong>Associated Labs: </strong> {event.detail.labs}</p>
+	                        <p><strong>Cuộc gặp với bác sĩ: </strong> <a href="#encounters">{event.detail.encounters}</a></p>
+	                        <p><strong>Xét nghiệm: </strong> {event.detail.labs}</p>
 	                        <p><strong>Thuốc điền trị liên quan: </strong> {event.detail.medications}</p>
 	                    </div>
 	                </div>
@@ -235,7 +235,7 @@ class Labs extends Component {
         <div className="row">
             <div className="headline two columns">
                 <div className="panel">
-                    <h2 id="tour-labs">Labs</h2>
+                    <h2 id="tour-labs">Xét nghiệm</h2>
                 </div>
             </div>
 
@@ -494,10 +494,10 @@ class Encounters extends Component {
 		                    <table>
 		                        <thead>
 		                            <tr>
-		                                <td className="table-date">Date</td>
-		                                <td className="table-type">Visit Type</td>
-		                                <td className="table-goals">Goals</td>
-		                                <td className="table-outcomes">Outcomes and Next Steps</td>
+		                                <td className="table-date">Ngày</td>
+		                                <td className="table-type">Loại</td>
+		                                <td className="table-goals">Mục đích</td>
+		                                <td className="table-outcomes">Kết quả và lời dặn của bác sĩ</td>
 		                            </tr>
 		                        </thead>
 		                        <tbody>
