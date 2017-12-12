@@ -351,7 +351,7 @@ class Meds extends Component {
 		        <div className="row">
 		            <div className="headline two columns">
 		                <div className="panel">
-		                    <h2>Meds</h2>
+		                    <h2>Đơn thuốc</h2>
 		                </div>
 		            </div>
 
@@ -484,7 +484,7 @@ class Encounters extends Component {
 		        <div className="row">
 		            <div className="headline two columns">
 		                <div className="panel">
-		                    <h2>Encounters</h2>
+		                    <h2>Gặp gỡ</h2>
 		                </div>
 		            </div>
 
