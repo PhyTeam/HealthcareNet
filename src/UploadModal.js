@@ -16,7 +16,7 @@ class FieldGroup extends Component {
   }
 }
 
-class QRModal extends Component {
+class UploadModal extends Component {
   constructor(props) {
     super(props);
 
@@ -24,7 +24,8 @@ class QRModal extends Component {
       modalIsOpen: false,
       show: true,
       onClick : props.onClick,
-      address: ''
+      address: '',
+      signature: "S8NiRgE0DNuVIOw9PNYfm1m7BpukR7jOwZ"
     };
 
     this.openModal = this.openModal.bind(this);
@@ -47,8 +48,7 @@ class QRModal extends Component {
   }
 
   handleChange(event) {
-    console.log(this.state.address);
-    this.setState({address: event.target.value});
+    this.setState({signature: event.target.value});
   }
 
   render() {
@@ -70,17 +70,20 @@ class QRModal extends Component {
             <Modal.Body>
               <Grid>
                 <Row className="show-grid">
-                    <Col xs={1} md={1}></Col>
-                    <Col xs={3} md={3}>{this.props.children}</Col>
-                    <Col xs={1} md={1}></Col>
-                </Row>
-                <Row className="show-grid">
                   <Col xs={8} md={8}>
                     <form>
                      <FieldGroup
                       id="formControlsText"
                       type="text"
-                      label="Patient ID:"
+                      label="Signiture ID:"
+                      placeholder="Enter text"
+                      onChange={this.handleChange}
+                      value={this.state.signature} />
+
+                    <FieldGroup
+                      id="formControlsText"
+                      type="text"
+                      label="Context:"
                       placeholder="Enter text"
                       onChange={this.handleChange}
                       value={this.state.address} />
@@ -88,9 +91,6 @@ class QRModal extends Component {
                   </Col>
                 </Row>
               </Grid>
-              <p>
-              Xin vui lòng quét mã này để truy cập vào hồ sơ
-              </p>
             </Modal.Body>
             <Modal.Footer>
               <Button onClick={close}>Close</Button>
@@ -102,4 +102,4 @@ class QRModal extends Component {
   }
 }
 
-export default QRModal
+export default UploadModal

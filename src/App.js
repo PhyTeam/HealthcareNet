@@ -4,50 +4,26 @@ import SimpleHealthcareNet from '../build/contracts/SimpleHealthcareNet.json'
 import getWeb3 from './utils/getWeb3'
 import { BioVitual, Allergies, Conditions, Labs, Meds, Encounters } from './BioVitual.js'
 import { Row, Col, Grid } from 'react-bootstrap'
-import { Navbar, Nav, NavItem, MenuItem, NavDropdown } from 'react-bootstrap'
+import { Navbar, Nav, NavItem } from 'react-bootstrap'
 import Sidebar from 'react-sidebar'
 import QRModal from './QRModal.js'
 import QRCode from 'qrcode.react'
 import medrec from './sampleDb.js'
+import UploadModal from './UploadModal';
 import getDatabaseName from './utils/getDatabaseName'
+/* global _ */
+import { AppRouter } from './init/router';
 
 import './css/oswald.css'
 import './css/open-sans.css'
 import './css/pure-min.css'
 import './App.css'
 import './css/sidebar.css'
-class MySidebar extends Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      sidebarOpen: false
-    };
-
-    this.onSetSidebarOpen = this.onSetSidebarOpen.bind(this);
-  }
-
-  onSetSidebarOpen() {
-
-  }
-
-  render() {
-
-    var sidebarContent = <p> Sidebar content................................................ </p>;
-    return (
-      <Sidebar sidebar={sidebarContent}
-             open={this.state.sidebarOpen}
-             docked={true}
-             onSetOpen={this.onSetSidebarOpen}>
-          <b>Main content</b>
-      </Sidebar>
-  )}
-}
 
 
 class App extends Component {
   constructor(props) {
-    super(props)
+    super(props);
 
     this.state = {
       patient: null,
@@ -55,17 +31,21 @@ class App extends Component {
       isLoading: true,
       storageValue: 0,
       web3: null,
-      isModalClosed: false
-    }
+      isModalClosed: false,
+      address: '',
+      uploading: false,
+      hospitals: ["bệnh viện quốc tế 24/10/2017"]
+    };
+
+    this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleSelect = this.handleSelect.bind(this);
+    this.handleUpload = this.handleUpload.bind(this);
   }
 
-  componentDidMount() {
-  }
-
-  componentWillMount() {
-    // Get network provider and web3 instance.
+  loadDataFromServer(address) {
+        // Get network provider and web3 instance.
     // See utils/getWeb3 for more info.
-    getDatabaseName
+    getDatabaseName(address)
       .then(result => {
         return fetch(result)
       })
@@ -97,7 +77,7 @@ class App extends Component {
       // Instantiate contract once web3 provided.
       //this.instantiateContract()
       //this.instantiateContract2()
-      this.handleCreateNewContract();
+      //this.handleCreateNewContract();
     })
     .catch(() => {
       console.log('Error finding web3.')
@@ -171,7 +151,10 @@ class App extends Component {
         //return myInstance.get.call(1,accounts[0])
         return myInstance.set({ hash:'744f06e3c69a5d893a774fb5537f180', url: "744f06e3c69a5d893a774fb5537f180"}, {from: '0x02F0B6ea96Df0f9475Bca1289ecB8b32465F2524'})
       }).then((results)=> {
-        console.log(results)
+        console.log(results);
+        var his = this.state.hospitals.slice();
+        his.push("New hospitals");
+        this.setState({hospitals: his});
 
       }).catch((error) => {
         console.log(error)
@@ -217,18 +200,37 @@ class App extends Component {
     return (
         <Grid>
           <Row className="show-grid">
-            <Col xs={2} md={2}>{sidebar}</Col>
-            <Col xs={10} md={10}>
+            <Col xs={12} md={3}>{sidebar}</Col>
+            <Col xs={12} md={9}>
               <BioVitual value={patient.bio} />
               <Allergies value={med.allergies}/>
               <Conditions value={patient.conditions} />
               <Labs value={med.labs}/>
               <Meds value={med.meds}/>
-              <Encounters value={med.encounters}/>
+
             </Col>
           </Row>
         </Grid>
     )
+  }
+
+  handleSubmit(address) {
+    console.log(address);
+    this.setState({isModalClosed: true, address: address});
+    this.loadDataFromServer(address);
+  }
+
+  handleSelect(key) {
+    console.log("Selected key " + key);
+    if (key === 2) {
+      // Open upload form
+      this.setState({uploading: true});
+    }
+  }
+
+  handleUpload() {
+    this.setState({uploading: false});
+    this.instantiateContract2();
   }
 
   render() {
@@ -241,15 +243,16 @@ class App extends Component {
           <Navbar.Toggle />
         </Navbar.Header>
         <Navbar.Collapse>
-          <Nav>
+          <Nav onSelect={this.handleSelect}>
             <NavItem eventKey={1} href="#">Trang chủ</NavItem>
-            <NavItem eventKey={2} href="#">About</NavItem>
+            <NavItem eventKey={2} href="#">Upload data</NavItem>
+            <NavItem eventKey={3} href="#">About</NavItem>
           </Nav>
         </Navbar.Collapse>
       </Navbar>
     );
 
-    const sidebar = (
+    var sidebar = (
       <div id="sidebar-wrapper">
         <ul className="sidebar-nav">
             <li className="sidebar-brand">
@@ -266,14 +269,23 @@ class App extends Component {
             <li>
                 <a href="#">bệnh viện quốc tế 24/10/2017</a>
             </li>
+
+            {this.state.hospitals.map((h) => {
+              return <li> <a> {h}</a> </li>
+            })}
         </ul>
     </div>
   );
 
+    const uploadmodal = (
+      <UploadModal> </UploadModal>
+    );
     const { isLoading, error } = this.state;
     if (!this.state.isModalClosed) {
+      // return <div> </div>
+
       return (
-        <QRModal onClick={()=> this.setState({isModalClosed: true})}>
+        <QRModal onClick={this.handleSubmit}>
           <QRCode size={256} value="http://facebook.github.io/react/" />
         </QRModal>
       )
@@ -282,7 +294,7 @@ class App extends Component {
     }
     else if (error) {
       return (<p> Error while loading {this.state.error} </p> )
-    } else {
+    } else if (!this.state.uploading) {
       const GridSample = this.renderMedRec(medrec, sidebar);
       return (
         <div className="App">
@@ -294,6 +306,8 @@ class App extends Component {
           </main>
         </div>
       );
+    } else {
+      return (<UploadModal onClick={this.handleUpload}> </UploadModal>);
     }
   }
 }

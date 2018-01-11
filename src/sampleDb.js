@@ -34,7 +34,7 @@ const event1 = {
   }
 }
 const event2 = {
-  conditionName: "Arthritis",
+  conditionNamơe: "Arthritis",
   date: "October 31, 2007",
   detail: {
     description: "Slipped on ice and fell.",
@@ -66,20 +66,20 @@ const labs = {
 
 const meds = [
   {
-    name: "Prescribed Medication (Pill)",
+    name: "Đơn thuốc (Dạng viên)",
     type: "prescribed",
     medication: "Excedrin",
     dose: "600mg",
-    instructions: "Take two pills, two times per day",
+    instructions: "Uống 2 viên, mỗi ngày uống một 2 lần",
     prescribed_date: "Oct 14, 2012",
     refill: 5
   },
   {
-    name: "Durable Medical",
+    name: "Trị liệu",
     type: "durable",
     medication: "CPAP Machine ",
     dose: "Use 10cm H2O nightly.",
-    instructions: "Take two pills, two times per day",
+    instructions: "Mỗi ngày 1 lần",
     prescribed_date: "Nov 5, 2006",
     refill: "N/A"
   }
@@ -88,14 +88,14 @@ const meds = [
 const encounter = {
   date: "June 22, 2012",
   type: "Office Visit",
-  place: "Blaisdell Manor Health Services",
-  goal: "Routine general medical examination at a health care facility, Screening for diabetes mellitus with lab glucose, Screening for ischemic heart disease ",
-  outcomes: "Prescribed Ketoconzole, which was later found to cause a dermititis allergic reaction. Will follow up with lab results.",
-  next_steps: "Call if you begin feeling burning sensations."
+  place: "Bệnh viện Chợ Rẫy",
+  goal: "Chăm sóc sức khỏe định kì, tầm soát đường huyết, bệnh tim mạch ",
+  outcomes: "Trị liệu Ketoconzole,",
+  next_steps: "Liên lạc nếu thấy biển hiện bất thường."
 }
 const encounter2 = {
   date: "August 14, 2011",
-  type: "Emergency Room",
+  type: "Cấp cứu",
   place: "UCSF Medical Center",
   goal: "Patient presenting severe abdomen pain, Perform lab urinalysis, Perform complete blood count lab, Perform axial CT abdomen with IV contrast, Perform axial CT pelvis with IV contrast, Prepare emergency center draw and hold blood sample ",
   outcomes: "Epiploic appendices inflamed and self-limiting. Reactive scattered subcentimeter mesenteric lymph nodes. No major concerns. No adverse reaction to oral or 100 mL Optiray IV contrast. Prescribing pain medication. Return if condition worsens.",
@@ -103,7 +103,7 @@ const encounter2 = {
 }
 const encounter3 = {
   date: "May 15, 2004",
-  type: "Emergency Room",
+  type: "Cấp cứu",
   place: "Hennepin County Medical Center",
   goal: "Patient arrived via ambulance, in shock and stablized after eating shellfish with adverse reaction",
   outcomes: "Stabilized in emergency room with Ana-Kit and histamine blocker in ER. Adverse reaction to shellfish noted in allergies.",

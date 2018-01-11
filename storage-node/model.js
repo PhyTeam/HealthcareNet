@@ -103,17 +103,17 @@ function createSampleDatabase() {
 		}
 	});
 	var testCondition2 = new ConditionEvent({
-		event_name: "Arthritis",
+		event_name: "Viêm khớp (ICD-K30)",
 	    date: "October 31, 2007",
 	    detail: {
-	      description: "Slipped on ice and fell.",
+	      description: "Ngã.",
 	      encounters: "Example Encounter 03/31/2005",
 	      labs: "Example Lab 09/14/2007",
 	      medications: "Example Medication"
 	    }
 	});
 	var testCondition3 = new ConditionEvent({
-		event_name: "Cholecystitis",
+		event_name: "Viêm ruột thừa (ICD-K31)",
 	    date: "October 31, 2007",
 	    detail: {
 	        description: "Slipped on ice and fell.",
@@ -126,29 +126,29 @@ function createSampleDatabase() {
 
 	var allergy1 = new Allergy({
 		type: "Severe",
-		name: "Shellfish",
-		description: "anaphylactic shock"
+		name: "Hải sản",
+		description: "sốc phản vệ"
 	});
 
 	var allergy2 = new Allergy({
 		type: "",
 		name: "Ketoconazole",
-		description: "dermatitis"
+		description: "viêm da"
 	});
 
 	var testMedRec = new MedRec ({
 		bio: {
 		  code: 'JTTO331613',
-		  name: "Bui Ba Phuc",
+		  name: "Nguyễn Văn A",
 	      address: {
-	        street: "1314 East Franklin Avenue",
-	        area: "Minneapolis, MN 55404"
+	        street: "131 Paster",
+	        area: "Thành Phố Hồ Chí Minh, MN 55404"
 	      },
 	      phone: "202-800-1210",
 	      email: "grandmalucy@email.net",
 	      dob: "DEC 28 1940",
 	      yearold: 72,
-	      bloodType: 'O-'	
+	      bloodType: 'O-'
 	  	},
 	  	conditions: [],
 	  	allergies: []

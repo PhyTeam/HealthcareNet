@@ -12,14 +12,12 @@ h1, h2, h3 {
 code {
   display: block;
   margin: 20px 0 15px 0;
-  padding: 10px;
   background: #eee;
 }
 
 .container {
   box-sizing: border-box;
   width: 100%;
-  padding: 5px 5px;
 }
 
 .pure-button-primary {
@@ -63,5 +61,4 @@ code {
 
 .navbar .uport-logo {
   height: 16px;
-  margin-right: 10px;
 }
